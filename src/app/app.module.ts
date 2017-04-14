@@ -5,6 +5,9 @@ import {MaterialModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import 'hammerjs';
 
+import * as firebase from 'firebase';
+// import {AngularFireModule} from 'angularfire2';
+
 import {LogsModule} from './logs/logs.module';
 import {SharedModule} from './shared/shared.module';
 
@@ -23,10 +26,20 @@ const routes: Routes = [
   }
 ];
 
+export const firebaseConfig = {
+  apiKey: "AIzaSyAELXBVivbvZeNMXbh9qnX9T3fxjJSg1VA",
+  authDomain: "share-log-c2f07.firebaseapp.com",
+  databaseURL: "https://share-log-c2f07.firebaseio.com",
+  projectId: "share-log-c2f07",
+  storageBucket: "share-log-c2f07.appspot.com",
+  messagingSenderId: "161699951866"
+};
+
 @NgModule({
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes),
+    // AngularFireModule.initializeApp(firebaseConfig),
     MaterialModule.forRoot(),
     BrowserAnimationsModule,
     LogsModule,
@@ -35,4 +48,8 @@ const routes: Routes = [
   declarations: [ AppComponent ],
   bootstrap: [ AppComponent ]
 })
-export class AppModule { }
+export class AppModule {
+  constructor() {
+    firebase.initializeApp(firebaseConfig);
+  }
+}

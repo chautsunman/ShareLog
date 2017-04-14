@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {RouterModule} from '@angular/router';
+import {FormsModule} from '@angular/forms';
 
 import {MaterialModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -13,6 +14,7 @@ import {NewLogComponent} from './new-log/new-log.component';
   imports: [
     BrowserModule,
     RouterModule,
+    FormsModule,
     MaterialModule,
     BrowserAnimationsModule
   ],

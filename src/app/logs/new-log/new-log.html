@@ -1,2 +1,15 @@
-<button (click)="add()" md-raised-button>Add</button>
-<a routerLink="/" md-raised-button>Back</a>
+<form #f="ngForm" (ngSubmit)="add(f)">
+  <md-input-container>
+    <input name="title" ngModel type="text" required placeholder="Title" mdInput>
+    <md-error>Title is required.</md-error>
+  </md-input-container>
+  <br>
+  <md-input-container>
+    <input name="detail" ngModel type="text" required placeholder="Detail" mdInput>
+    <md-error>Detail is required.</md-error>
+  </md-input-container>
+  <br>
+
+  <button md-raised-button disabled="{{!f.valid}}">Add</button>
+  <a routerLink="/" md-raised-button>Back</a>
+</form>
