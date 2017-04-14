@@ -10,8 +10,13 @@ import {SharedModule} from './shared/shared.module';
 
 import { AppComponent }  from './app.component';
 import {LogListComponent} from './logs/log-list/log-list.component';
+import {NewLogComponent} from './logs/new-log/new-log.component';
 
 const routes: Routes = [
+  {
+    path: 'newlog',
+    component: NewLogComponent
+  },
   {
     path: '',
     component: LogListComponent
