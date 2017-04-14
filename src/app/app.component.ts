@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   template: `
     <app-bar></app-bar>
 
-    <h1>Share Log</h1>
+    <router-outlet></router-outlet>
   `,
 })
 export class AppComponent {
