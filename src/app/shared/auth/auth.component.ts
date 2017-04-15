@@ -12,7 +12,14 @@ import * as firebase from 'firebase';
 export class AuthComponent {
   constructor(
     private router: Router
-  ) {}
+  ) {
+    firebase.auth().onAuthStateChanged((user: any) => {
+      if (user) {
+        // signed out
+        router.navigateByUrl('/home');
+      }
+    });
+  }
 
   googleSignIn(): void {
     firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider())

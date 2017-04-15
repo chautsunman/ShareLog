@@ -19,7 +19,14 @@ export class NewLogComponent implements OnInit {
 
   constructor(
     private router: Router
-  ) {}
+  ) {
+    firebase.auth().onAuthStateChanged((user: any) => {
+      if (!user) {
+        // signed out
+        router.navigateByUrl('/');
+      }
+    });
+  }
 
   ngOnInit(): void {
     this.initializeMap();
