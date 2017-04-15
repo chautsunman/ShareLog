@@ -14,7 +14,7 @@ export class AppComponent {
   constructor(
     private router: Router
   ) {
-    firebase.auth().onAuthStateChanged((user) => {
+    firebase.auth().onAuthStateChanged((user: any) => {
       if (user) {
         // signed in
         router.navigateByUrl('/home');
