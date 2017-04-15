@@ -1,0 +1,16 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "log": {
+      ".read": "auth !== null",
+      ".write": "auth !== null"
+    },
+    "users": {
+      "$userId": {
+        ".read": "auth !== null && $userId === auth.uid",
+        ".write": "auth !== null && $userId === auth.uid"
+      }
+    }
+  }
+}

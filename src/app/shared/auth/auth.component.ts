@@ -16,8 +16,15 @@ export class AuthComponent {
 
   googleSignIn(): void {
     firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider())
-        .then((user) => {
-          console.log(user);
+        .then((result) => {
+          let user = result.user;
+
+          firebase.database().ref('/users/'+user.uid).set({
+            email: user.email,
+            displayName: user.displayName,
+            photoUrl: user.photoURL,
+            isAnonymous: user.isAnonymous
+          });
         })
         .catch((error) => {
           console.log('Google sign in error', error);
@@ -27,7 +34,9 @@ export class AuthComponent {
   anonymousSignIn(): void {
     firebase.auth().signInAnonymously()
         .then((user) => {
-          console.log(user);
+          firebase.database().ref('/users/'+user.uid).set({
+            isAnonymous: true
+          })
         })
         .catch((error) => {
           console.log('anonymous sign in error', error);
