@@ -9,12 +9,14 @@ import * as firebase from 'firebase';
 // import {AngularFireModule} from 'angularfire2';
 
 import {LogsModule} from './logs/logs.module';
+import {AnalyticsModule} from './analytics/analytics.module';
 import {SharedModule} from './shared/shared.module';
 
 import { AppComponent }  from './app.component';
 import {AuthComponent} from './shared/auth/auth.component';
 import {LogListComponent} from './logs/log-list/log-list.component';
 import {NewLogComponent} from './logs/new-log/new-log.component';
+import {AnalyticsComponent} from './analytics/analytics/analytics.component';
 
 const routes: Routes = [
   {
@@ -28,6 +30,10 @@ const routes: Routes = [
   {
     path: 'newlog',
     component: NewLogComponent
+  },
+  {
+    path: 'analytics',
+    component: AnalyticsComponent
   }
 ];
 
@@ -48,6 +54,7 @@ export const firebaseConfig = {
     MaterialModule.forRoot(),
     BrowserAnimationsModule,
     LogsModule,
+    AnalyticsModule,
     SharedModule
   ],
   declarations: [ AppComponent ],
