@@ -12,17 +12,22 @@ import {LogsModule} from './logs/logs.module';
 import {SharedModule} from './shared/shared.module';
 
 import { AppComponent }  from './app.component';
+import {AuthComponent} from './shared/auth/auth.component';
 import {LogListComponent} from './logs/log-list/log-list.component';
 import {NewLogComponent} from './logs/new-log/new-log.component';
 
 const routes: Routes = [
   {
-    path: 'newlog',
-    component: NewLogComponent
+    path: '',
+    component: AuthComponent
   },
   {
-    path: '',
+    path: 'home',
     component: LogListComponent
+  },
+  {
+    path: 'newlog',
+    component: NewLogComponent
   }
 ];
 

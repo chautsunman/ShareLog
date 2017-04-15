@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import {Router} from '@angular/router';
+
 @Component({
   selector: 'sharelog-app',
   template: `
@@ -9,5 +11,17 @@ import { Component } from '@angular/core';
   `,
 })
 export class AppComponent {
-
+  constructor(
+    private router: Router
+  ) {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        // signed in
+        router.navigateByUrl('/home');
+      } else {
+        // signed out
+        router.navigateByUrl('/');
+      }
+    });
+  }
 }

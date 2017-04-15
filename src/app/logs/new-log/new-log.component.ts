@@ -28,7 +28,7 @@ export class NewLogComponent {
           .then(() => {
             console.log('added new log');
 
-            this.router.navigateByUrl('/');
+            this.router.navigateByUrl('/home');
           })
           .catch((error) => {
             console.log('add new log error', error);
