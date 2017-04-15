@@ -14,7 +14,7 @@ export class LogListComponent {
   logs: any[] = [];
 
   constructor() {
-    firebase.database().ref('/log').once('value')
+    firebase.database().ref('/log/'+firebase.auth().currentUser.uid).once('value')
         .then((snapshot) => {
           console.log(snapshot.val());
 

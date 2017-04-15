@@ -3,8 +3,10 @@
     ".read": false,
     ".write": false,
     "log": {
-      ".read": "auth !== null",
-      ".write": "auth !== null"
+      "$userId": {
+        ".read": "auth!== null && $userId === auth.uid",
+        ".write": "auth!== null && $userId === auth.uid"
+      }
     },
     "users": {
       "$userId": {

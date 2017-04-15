@@ -20,7 +20,7 @@ export class NewLogComponent {
     console.log("add", f.value, f.valid);
 
     if (f.valid) {
-      firebase.database().ref('/log')
+      firebase.database().ref('/log/'+firebase.auth().currentUser.uid)
           .push({
             title: f.value.title,
             detail: f.value.detail

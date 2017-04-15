@@ -5,8 +5,9 @@
   </md-input-container>
   <br>
   <md-input-container>
-    <input name="detail" ngModel type="text" required placeholder="Detail" mdInput>
+    <textarea #detail name="detail" ngModel type="text" required maxlength="1000" placeholder="Detail" mdInput></textarea>
     <md-error>Detail is required.</md-error>
+    <md-hint align="end">{{detail.value.length}} / 1000</md-hint>
   </md-input-container>
   <br>
 
