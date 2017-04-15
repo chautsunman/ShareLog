@@ -23,7 +23,10 @@ export class NewLogComponent {
       firebase.database().ref('/log/'+firebase.auth().currentUser.uid)
           .push({
             title: f.value.title,
-            detail: f.value.detail
+            detail: f.value.detail,
+            money: f.value.money,
+            recommend: f.value.recommend,
+            rate: f.value.rate
           })
           .then(() => {
             console.log('added new log');

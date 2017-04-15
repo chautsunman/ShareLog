@@ -11,6 +11,18 @@
   </md-input-container>
   <br>
 
+  <md-input-container>
+    <input name="money" ngModel type="number" placeholder="Money" mdInput>
+    <span mdPrefix>$</span>
+  </md-input-container>
+  <br>
+
+  <md-checkbox name="recommend" ngModel checked>Recommend</md-checkbox>
+  <br>
+
+  <md-slider name="rate" ngModel min="1" max="10" step="1" value="10" thumbLabel></md-slider>
+  <br>
+
   <button md-raised-button disabled="{{!f.valid}}">Add</button>
   <a routerLink="/" md-raised-button>Back</a>
 </form>
