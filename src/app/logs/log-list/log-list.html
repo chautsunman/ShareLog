@@ -4,10 +4,10 @@
     [colspan]="log.size.cols"
     [rowspan]="log.size.rows"
   >
-    <log-card [log]="log.log"></log-card>
+    <log-card [id]="log.id" [log]="log.log"></log-card>
   </md-grid-tile>
 </md-grid-list>
 
-<a routerLink="/newlog" md-fab>
+<a routerLink="/new-log" md-fab>
   <md-icon>add</md-icon>
 </a>

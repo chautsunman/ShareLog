@@ -15,7 +15,7 @@ import {SharedModule} from './shared/shared.module';
 import { AppComponent }  from './app.component';
 import {AuthComponent} from './shared/auth/auth.component';
 import {LogListComponent} from './logs/log-list/log-list.component';
-import {NewLogComponent} from './logs/new-log/new-log.component';
+import {LogDetailComponent} from './logs/log-detail/log-detail.component';
 import {AnalyticsComponent} from './analytics/analytics/analytics.component';
 
 const routes: Routes = [
@@ -28,8 +28,12 @@ const routes: Routes = [
     component: LogListComponent
   },
   {
-    path: 'newlog',
-    component: NewLogComponent
+    path: 'log-detail/:id',
+    component: LogDetailComponent
+  },
+  {
+    path: 'new-log',
+    component: LogDetailComponent
   },
   {
     path: 'analytics',

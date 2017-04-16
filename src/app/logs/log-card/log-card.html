@@ -1,4 +1,7 @@
 <md-card>
   <md-card-title>{{log.title}}</md-card-title>
   <md-card-content>{{log.detail}}</md-card-content>
+  <md-card-actions>
+    <a [routerLink]="['/log-detail', id]" md-button>Learn More</a>
+  </md-card-actions>
 </md-card>

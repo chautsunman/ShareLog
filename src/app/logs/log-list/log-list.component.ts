@@ -28,8 +28,8 @@ export class LogListComponent {
           .then((snapshot) => {
             console.log(snapshot.val());
 
-            for (let i in snapshot.val()) {
-              this.logs.push({log: snapshot.val()[i], size: {cols: 1, rows: 1}});
+            for (let id in snapshot.val()) {
+              this.logs.push({id: id, log: snapshot.val()[id], size: {cols: 1, rows: 1}});
             }
 
             console.log(this.logs);

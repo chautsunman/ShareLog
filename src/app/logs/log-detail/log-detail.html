@@ -1,0 +1,31 @@
+<form #f="ngForm" (ngSubmit)="save(f, logId)">
+  <md-input-container>
+    <input [(ngModel)]="log.title" name="title" type="text" required placeholder="Title" mdInput>
+    <md-error>Title is required.</md-error>
+  </md-input-container>
+  <br>
+  <md-input-container>
+    <textarea [(ngModel)]="log.detail" name="detail" type="text" required maxlength="1000" placeholder="Detail" mdInput></textarea>
+    <md-error>Detail is required.</md-error>
+    <md-hint align="end">{{log.detail.length}} / 1000</md-hint>
+  </md-input-container>
+  <br>
+
+  <md-input-container>
+    <input [(ngModel)]="log.money" name="money" type="number" placeholder="Money" mdInput>
+    <span mdPrefix>$</span>
+  </md-input-container>
+  <br>
+
+  <md-checkbox [(ngModel)]="log.recommend" name="recommend" checked>Recommend</md-checkbox>
+  <br>
+
+  <md-slider [(ngModel)]="log.rate" name="rate" min="1" max="10" step="1" value="10" thumbLabel></md-slider>
+  <br>
+
+  <div id="map"></div>
+
+  <button *ngIf="!logId" md-raised-button disabled="{{!f.valid}}">Add</button>
+  <button *ngIf="logId" md-raised-button disabled="{{!f.valid}}">Save</button>
+  <a routerLink="/home" md-raised-button>Back</a>
+</form>

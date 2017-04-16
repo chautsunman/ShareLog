@@ -8,5 +8,6 @@ import {Log} from '../log';
   styleUrls: ['./log-card.css']
 })
 export class LogCardComponent {
+  @Input() id: string;
   @Input() log: Log;
 }

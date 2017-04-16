@@ -8,7 +8,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {LogListComponent} from './log-list/log-list.component';
 import {LogCardComponent} from './log-card/log-card.component';
-import {NewLogComponent} from './new-log/new-log.component';
+import {LogDetailComponent} from './log-detail/log-detail.component';
 
 @NgModule({
   imports: [
@@ -21,12 +21,12 @@ import {NewLogComponent} from './new-log/new-log.component';
   declarations: [
     LogListComponent,
     LogCardComponent,
-    NewLogComponent
+    LogDetailComponent
   ],
   exports: [
     LogListComponent,
     LogCardComponent,
-    NewLogComponent
+    LogDetailComponent
   ]
 })
 export class LogsModule {}
