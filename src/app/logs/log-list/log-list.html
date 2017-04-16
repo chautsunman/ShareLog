@@ -1,12 +1,4 @@
-<md-grid-list cols="4" rowHeight="1:1">
-  <md-grid-tile
-    *ngFor="let log of logs"
-    [colspan]="log.size.cols"
-    [rowspan]="log.size.rows"
-  >
-    <log-card [id]="log.id" [log]="log.log"></log-card>
-  </md-grid-tile>
-</md-grid-list>
+<log-card *ngFor="let log of logs" [id]="log.id" [log]="log.log"></log-card>
 
 <a routerLink="/new-log" md-fab>
   <md-icon>add</md-icon>

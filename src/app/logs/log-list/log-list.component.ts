@@ -26,13 +26,13 @@ export class LogListComponent {
 
       firebase.database().ref('/log/'+firebase.auth().currentUser.uid).once('value')
           .then((snapshot) => {
-            console.log(snapshot.val());
+            console.log('logs snapshot', snapshot.val());
 
             for (let id in snapshot.val()) {
-              this.logs.push({id: id, log: snapshot.val()[id], size: {cols: 1, rows: 1}});
+              this.logs.push({id: id, log: snapshot.val()[id]});
             }
 
-            console.log(this.logs);
+            console.log('logs', this.logs);
           })
           .catch((error) => {
             console.log(error);
