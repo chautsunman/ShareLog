@@ -24,8 +24,9 @@
   <br>
 
   <div id="map"></div>
+  <br>
 
-  <button *ngIf="!logId" md-raised-button disabled="{{!f.valid}}">Add</button>
-  <button *ngIf="logId" md-raised-button disabled="{{!f.valid}}">Save</button>
-  <a routerLink="/home" md-raised-button>Back</a>
+  <button *ngIf="!logId" md-raised-button disabled="{{!f.valid}}" color="accent">Add</button>
+  <button *ngIf="logId" md-raised-button disabled="{{!f.valid}}" color="accent">Save</button>
+  <a routerLink="/home" md-button>Back</a>
 </form>
