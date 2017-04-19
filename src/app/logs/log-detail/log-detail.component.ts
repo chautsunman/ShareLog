@@ -24,6 +24,18 @@ export class LogDetailComponent implements OnInit {
   map: any;
   mapMarker: any;
 
+  // TODO: const
+  titlePlaceholders = {
+    activity: 'Activity name',
+    food: 'Food'
+  };
+
+  // TODO: const
+  detailPlaceholders = {
+    activity: 'Activity detail',
+    food: 'Detail'
+  };
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
