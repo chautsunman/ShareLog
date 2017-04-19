@@ -47,7 +47,7 @@ export class LogDetailComponent implements OnInit {
 
             let log = snapshot.val();
 
-            this.log = new Log(log.title, log.detail, log.money, log.recommend, log.rate, log.lat, log.lng);
+            this.log = new Log(log.title, log.detail, log.type, log.money, log.recommend, log.rate, log.lat, log.lng);
             this.initializeMap({lat: log.lat, lng: log.lng});
           })
           .catch((error) => {

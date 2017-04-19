@@ -11,6 +11,12 @@
   </md-input-container>
   <br>
 
+  <md-select [(ngModel)]="log.type" name="type" placeholder="Type">
+    <md-option value="food">Food</md-option>
+    <md-option value="activity">Activity</md-option>
+  </md-select>
+  <br>
+
   <md-input-container>
     <input [(ngModel)]="log.money" name="money" type="number" placeholder="Money" mdInput>
     <span mdPrefix>$</span>

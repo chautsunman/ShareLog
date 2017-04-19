@@ -1,6 +1,7 @@
 export class Log {
   title: string;
   detail: string;
+  type: string;
   money: number;
   recommend: boolean;
   rate: number;
@@ -8,11 +9,12 @@ export class Log {
   lng: number;
 
   constructor(
-      title?: string, detail?: string,
+      title?: string, detail?: string, type?: string,
       money?: number, recommend?: boolean, rate?: number,
       lat?: number, lng?: number) {
     this.title = title || '';
     this.detail = detail || '';
+    this.type = type || '';
     this.money = money ? money : 0;
     this.recommend = recommend || true;
     this.rate = rate || 10;
