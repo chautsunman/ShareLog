@@ -1,22 +1,21 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 import {Router} from '@angular/router';
 
-import * as firebase from 'firebase';
-// import {AngularFire, FirebaseListObservable} from 'angularfire2';
-
 import {Log} from '../log';
+import {LogService} from '../log-service/log.service';
 
 @Component({
   selector: 'log-list',
   templateUrl: './log-list.html',
   styleUrls: ['./log-list.css']
 })
-export class LogListComponent {
+export class LogListComponent implements OnInit {
   logs: any[] = [];
 
   constructor(
-    private router: Router
+    private router: Router,
+    private logService: LogService
   ) {
     firebase.auth().onAuthStateChanged((user: any) => {
       if (!user) {
@@ -24,19 +23,25 @@ export class LogListComponent {
         router.navigateByUrl('/');
       }
 
-      firebase.database().ref('/log/'+firebase.auth().currentUser.uid).once('value')
-          .then((snapshot) => {
-            console.log('logs snapshot', snapshot.val());
+      this.ngOnInit();
+    });
+  }
 
-            for (let id in snapshot.val()) {
-              this.logs.push({id: id, log: snapshot.val()[id]});
+  ngOnInit(): void {
+    if (firebase.auth().currentUser) {
+      this.logService.getLogs(firebase.auth().currentUser.uid)
+          .then((logs) => {
+            this.logs = [];
+
+            for (let id in logs) {
+              this.logs.push({id: id, log: logs[id]});
             }
 
             console.log('logs', this.logs);
           })
           .catch((error) => {
-            console.log(error);
+            console.log('LogList init error', error);
           });
-    });
+    }
   }
 }

@@ -10,6 +10,8 @@ import {LogListComponent} from './log-list/log-list.component';
 import {LogCardComponent} from './log-card/log-card.component';
 import {LogDetailComponent} from './log-detail/log-detail.component';
 
+import {LogService} from './log-service/log.service';
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -22,6 +24,9 @@ import {LogDetailComponent} from './log-detail/log-detail.component';
     LogListComponent,
     LogCardComponent,
     LogDetailComponent
+  ],
+  providers: [
+    LogService
   ],
   exports: [
     LogListComponent,

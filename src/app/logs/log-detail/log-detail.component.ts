@@ -8,8 +8,7 @@ import {Location} from '@angular/common';
 import 'rxjs/add/operator/switchMap';
 
 import {Log} from '../log';
-
-import * as firebase from 'firebase';
+import {LogService} from '../log-service/log.service';
 
 declare var google: any;
 
@@ -39,32 +38,31 @@ export class LogDetailComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    private logService: LogService
   ) {
     firebase.auth().onAuthStateChanged((user: any) => {
       if (!user) {
         // signed out
         router.navigateByUrl('/');
       }
+
+      this.ngOnInit();
     });
   }
 
   ngOnInit(): void {
     this.logId = this.route.snapshot.params['id'];
 
-    if (this.logId) {
-      firebase.database().ref('/log/'+firebase.auth().currentUser.uid+'/'+this.logId).once('value')
-          .then((snapshot) => {
-            console.log('log snapshot', snapshot.val());
-
-            let log = snapshot.val();
-
+    if (firebase.auth().currentUser && this.logId) {
+      this.logService.getLog(firebase.auth().currentUser.uid, this.logId)
+          .then((log) => {
             this.log = new Log(log.title, log.detail, log.type, log.money, log.recommend, log.rate, log.lat, log.lng);
             this.initializeMap({lat: log.lat, lng: log.lng});
           })
           .catch((error) => {
-            console.log('get log detail error', error);
-          });
+            console.log('LogDetail init error', error);
+          })
     } else {
       this.initializeMap({lat: this.log.lat, lng: this.log.lng});
     }
@@ -98,21 +96,12 @@ export class LogDetailComponent implements OnInit {
     console.log("save", f.value, f.valid);
 
     if (f.valid) {
-      let logRef = firebase.database().ref('/log/'+firebase.auth().currentUser.uid);
-      if (logId) {
-        logRef = logRef.child(logId);
-      } else {
-        logRef = logRef.push();
-      }
-
-      logRef.update(this.log)
+      this.logService.saveLog(firebase.auth().currentUser.uid, logId, this.log)
           .then(() => {
-            console.log('saved log');
-
             this.router.navigateByUrl('/home');
           })
           .catch((error) => {
-            console.log('save log error', error);
+            console.log('LogDetail save error', error);
           });
     } else {
       alert('Invalid input.');
