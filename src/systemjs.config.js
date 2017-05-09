@@ -32,6 +32,9 @@
       'firebase': 'npm:firebase/firebase.js',
       // 'angularfire2': 'npm:angularfire2/bundles/angularfire2.umd.js',
 
+      // Highcharts
+      'highcharts': 'npm:highcharts/highcharts.js',
+
       // other libraries
       'rxjs':                      'npm:rxjs',
       'angular-in-memory-web-api': 'npm:angular-in-memory-web-api/bundles/in-memory-web-api.umd.js'
