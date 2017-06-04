@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 
 import {Router} from '@angular/router';
 
-var Highcharts = require('highcharts');
+declare var google : any;
 
 // TODO: import from LogModule
 import {Log} from '../../logs/log';
@@ -15,7 +15,7 @@ import {LogService} from '../../logs/log-service/log.service';
 })
 export class AnalyticsComponent implements OnInit {
   logs: Log[] = [];
-  expenses: Array<any> = [];
+  expenses: any[] = [];
 
   constructor(
     private router: Router,
@@ -31,37 +31,59 @@ export class AnalyticsComponent implements OnInit {
     });
   }
 
+  drawExpenseChart(expenses: any[]): void {
+    let data = new google.visualization.DataTable();
+    data.addColumn('number', 'Log');
+    data.addColumn('number', 'Expense');
+
+    let dataRows = [];
+
+    for (let i = 0; i < expenses.length; i++) {
+      dataRows.push([i, expenses[i]]);
+    }
+
+    data.addRows(dataRows);
+
+    let options = {
+      chart: {
+        title: 'Expenses'
+      }
+    };
+
+    let chart = new google.charts.Line(document.getElementById('expense-chart'));
+
+    chart.draw(data, google.charts.Line.convertOptions(options));
+  }
+
   ngOnInit(): void {
     if (firebase.auth().currentUser) {
-      this.logService.getLogs(firebase.auth().currentUser.uid)
-          .then((logs) => {
-            this.logs = [];
-            this.expenses = [];
+      let getLogsPromise = this.logService.getLogs(firebase.auth().currentUser.uid);
+      let loadChartsLibraryPromise = new Promise((resolve, reject) => {
+        google.charts.load('current', {packages: ['corechart', 'line']});
+        google.charts.setOnLoadCallback(resolve);
+      });
 
-            for (let id in logs) {
-              let log = logs[id];
-              this.logs.push(new Log(log.title, log.detail, log.type, log.money, log.recommend, log.rate, log.lat, log.lng));
-              this.expenses.push(log.money);
-            }
+      let promises = Promise.all([getLogsPromise, loadChartsLibraryPromise]);
 
-            console.log('logs', this.logs);
+      promises.then((values) => {
+        this.logs = [];
+        this.expenses = [];
 
-            Highcharts.chart('expenses-chart', {
-              title: {text: 'Expenses'},
-              yAxis: {
-                title: {text: 'Expenses'}
-              },
-              series: [
-                {
-                  name: 'Expenses',
-                  data: this.expenses
-                }
-              ]
-            });
-          })
-          .catch((error) => {
-            console.log('LogList init getLogs error', error);
-          });
+        let i = 0;
+        for (let id in values[0]) {
+          let log = values[0][id];
+          this.logs.push(new Log(log.title, log.detail, log.type, log.money, log.recommend, log.rate, log.lat, log.lng));
+          this.expenses.push(log.money);
+
+          i++;
+        }
+
+        console.log('logs', this.logs);
+
+        this.drawExpenseChart(this.expenses);
+      }).catch((error) => {
+        console.log(error);
+      });
     }
   }
 }
