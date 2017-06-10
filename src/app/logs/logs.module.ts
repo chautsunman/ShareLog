@@ -3,8 +3,18 @@ import {BrowserModule} from '@angular/platform-browser';
 import {RouterModule} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 
-import {MaterialModule} from '@angular/material';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+// import {MaterialModule} from '@angular/material';
+import {MdCardModule} from '@angular/material';
+import {
+  MdInputModule,
+  MdButtonModule,
+  MdCheckboxModule,
+  MdSelectModule,
+  MdSliderModule,
+  MdDatepickerModule,
+  MdNativeDateModule,
+  MdIconModule
+} from '@angular/material';
 
 import {LogListComponent} from './log-list/log-list.component';
 import {LogCardComponent} from './log-card/log-card.component';
@@ -17,8 +27,16 @@ import {LogService} from './log-service/log.service';
     BrowserModule,
     RouterModule,
     FormsModule,
-    MaterialModule,
-    BrowserAnimationsModule
+    // MaterialModule,
+    MdCardModule,
+    MdButtonModule,
+    MdInputModule,
+    MdCheckboxModule,
+    MdSelectModule,
+    MdSliderModule,
+    MdDatepickerModule,
+    MdNativeDateModule,
+    MdIconModule
   ],
   declarations: [
     LogListComponent,
