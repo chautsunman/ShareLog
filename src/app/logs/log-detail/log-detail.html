@@ -46,8 +46,8 @@
 
   <div class="row">
     <div class="col-xs-12">
-      <button *ngIf="!logId" md-raised-button disabled="{{!f.valid}}" color="accent">Add</button>
-      <button *ngIf="logId" md-raised-button disabled="{{!f.valid}}" color="accent">Save</button>
+      <button *ngIf="!logId" md-raised-button [disabled]="!f.valid" color="accent">Add</button>
+      <button *ngIf="logId" md-raised-button [disabled]="!f.valid" color="accent">Save</button>
       <a routerLink="/home" md-button>Back</a>
     </div>
   </div>
