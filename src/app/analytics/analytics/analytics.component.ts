@@ -4,9 +4,7 @@ import {Router} from '@angular/router';
 
 declare var google : any;
 
-// TODO: import from LogModule
-import {Log} from '../../logs/log';
-import {LogService} from '../../logs/log-service/log.service';
+import {AnalyticsService} from '../analytics-service/analytics.service';
 
 @Component({
   selector: 'analytics',
@@ -14,12 +12,11 @@ import {LogService} from '../../logs/log-service/log.service';
   styleUrls: ['./analytics.css']
 })
 export class AnalyticsComponent implements OnInit {
-  logs: Log[] = [];
   expenses: any[] = [];
 
   constructor(
     private router: Router,
-    private logService: LogService
+    private analyticsService: AnalyticsService
   ) {
     firebase.auth().onAuthStateChanged((user: any) => {
       if (!user) {
@@ -33,13 +30,13 @@ export class AnalyticsComponent implements OnInit {
 
   drawExpenseChart(expenses: any[]): void {
     let data = new google.visualization.DataTable();
-    data.addColumn('number', 'Log');
+    data.addColumn('string', 'Date');
     data.addColumn('number', 'Expense');
 
     let dataRows = [];
 
     for (let i = 0; i < expenses.length; i++) {
-      dataRows.push([i, expenses[i]]);
+      dataRows.push([expenses[i].date, expenses[i].expense]);
     }
 
     data.addRows(dataRows);
@@ -57,28 +54,24 @@ export class AnalyticsComponent implements OnInit {
 
   ngOnInit(): void {
     if (firebase.auth().currentUser) {
-      let getLogsPromise = this.logService.getLogs(firebase.auth().currentUser.uid);
+      let getExpensesPromise = this.analyticsService.getExpenses(firebase.auth().currentUser.uid);
       let loadChartsLibraryPromise = new Promise((resolve, reject) => {
         google.charts.load('current', {packages: ['corechart', 'line']});
         google.charts.setOnLoadCallback(resolve);
       });
 
-      let promises = Promise.all([getLogsPromise, loadChartsLibraryPromise]);
+      let promises = Promise.all([getExpensesPromise, loadChartsLibraryPromise]);
 
       promises.then((values) => {
-        this.logs = [];
+        let expenses = values[0];
+
         this.expenses = [];
 
-        let i = 0;
-        for (let id in values[0]) {
-          let log = values[0][id];
-          this.logs.push(new Log(log.title, log.detail, log.type, log.money, log.recommend, log.rate, log.lat, log.lng));
-          this.expenses.push(log.money);
-
-          i++;
+        for (let date in expenses) {
+          this.expenses.push({date: new Date(parseInt(date)).toDateString(), expense: expenses[date]});
         }
 
-        console.log('logs', this.logs);
+        console.log('expenses', this.expenses);
 
         this.drawExpenseChart(this.expenses);
       }).catch((error) => {

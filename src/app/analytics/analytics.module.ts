@@ -7,6 +7,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {AnalyticsComponent} from './analytics/analytics.component';
 
+import {AnalyticsService} from './analytics-service/analytics.service';
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -16,6 +18,9 @@ import {AnalyticsComponent} from './analytics/analytics.component';
   ],
   declarations: [
     AnalyticsComponent
+  ],
+  providers: [
+    AnalyticsService
   ]
 })
 export class AnalyticsModule {}
