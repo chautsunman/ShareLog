@@ -21,7 +21,7 @@
       <br *ngIf="log.type === 'activity'">
 
       <md-input-container>
-        <input [(ngModel)]="log.date" name="date" mdInput [mdDatepicker]="date">
+        <input [(ngModel)]="logDate" name="date" mdInput [mdDatepicker]="date">
         <button mdSuffix [mdDatepickerToggle]="date"></button>
       </md-input-container>
       <md-datepicker #date></md-datepicker>

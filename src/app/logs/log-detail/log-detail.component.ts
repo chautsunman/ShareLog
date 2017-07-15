@@ -20,6 +20,7 @@ declare var google: any;
 export class LogDetailComponent implements OnInit {
   logId: string = '';
   log: Log = new Log();
+  logDate: Date = new Date();
   map: any;
   mapMarker: any;
 
@@ -57,7 +58,8 @@ export class LogDetailComponent implements OnInit {
     if (firebase.auth().currentUser && this.logId) {
       this.logService.getLog(firebase.auth().currentUser.uid, this.logId)
           .then((log) => {
-            this.log = new Log(log.title, log.detail, log.type, log.money, log.recommend, log.rate, log.lat, log.lng);
+            this.log = new Log(log.title, log.detail, log.type, log.money, log.recommend, log.rate, log.date, log.lat, log.lng);
+            this.logDate = new Date(log.date);
             this.initializeMap({lat: log.lat, lng: log.lng});
           })
           .catch((error) => {
@@ -96,6 +98,8 @@ export class LogDetailComponent implements OnInit {
     console.log("save", f.value, f.valid);
 
     if (f.valid) {
+      this.log.date = this.logDate.getTime();
+
       this.logService.saveLog(firebase.auth().currentUser.uid, logId, this.log)
           .then(() => {
             this.router.navigateByUrl('/home');
