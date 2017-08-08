@@ -38,12 +38,14 @@ export class LogService {
     });
   }
 
-  saveLog(uid: string, logId: string, log: Log): Promise<any> {
+  saveLog(uid: string, log: Log): Promise<any> {
     let logRef = firebase.database().ref('/log/'+uid);
-    if (logId) {
-      logRef = logRef.child(logId);
+    if (log.id) {
+      logRef = logRef.child(log.id);
     } else {
       logRef = logRef.push();
+
+      log.id = logRef.key;
     }
 
     return new Promise<any>((resolve, reject) => {

@@ -1,8 +1,8 @@
 <ul class="mdc-list">
-  <li *ngFor="let log of logs" [routerLink]="['/log-detail', log.id]" class="mdc-list-item">{{log.log.title}}</li>
+  <li *ngFor="let log of logs" [routerLink]="['/log-detail', log.id]" class="mdc-list-item">{{log.title}}</li>
 </ul>
 
-<button class="mdc-fab fab--absolute material-icons" aria-label="Add">
+<button routerLink="/new-log" class="mdc-fab fab--absolute material-icons" aria-label="Add">
   <span class="mdc-fab__icon">
     add
   </span>

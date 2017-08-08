@@ -58,8 +58,8 @@ export class LogDetailComponent implements OnInit {
     if (firebase.auth().currentUser && this.logId) {
       this.logService.getLog(firebase.auth().currentUser.uid, this.logId)
           .then((log) => {
-            this.log = new Log(log.title, log.detail, log.type, log.money, log.recommend, log.rate, log.date, log.lat, log.lng);
-            this.logDate = new Date(log.date);
+            this.log = new Log(this.logId, log.title, log.detail, log.type, log.money, log.recommend, log.rate, log.date, log.lat, log.lng);
+            this.logDate = log.date ? new Date(log.date) : null;
             this.initializeMap({lat: log.lat, lng: log.lng});
           })
           .catch((error) => {
@@ -94,13 +94,13 @@ export class LogDetailComponent implements OnInit {
     });
   }
 
-  save(f: NgForm, logId: string): void {
+  save(f: NgForm): void {
     console.log("save", f.value, f.valid);
 
     if (f.valid) {
       this.log.date = this.logDate ? this.logDate.getTime() : null;
 
-      this.logService.saveLog(firebase.auth().currentUser.uid, logId, this.log)
+      this.logService.saveLog(firebase.auth().currentUser.uid, this.log)
           .then(() => {
             this.router.navigateByUrl('/home');
           })

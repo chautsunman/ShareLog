@@ -1,4 +1,5 @@
 export class Log {
+  id: string
   title: string;
   detail: string;
   type: string;
@@ -10,9 +11,10 @@ export class Log {
   lng: number;
 
   constructor(
-      title?: string, detail?: string, type?: string,
+      id?: string, title?: string, detail?: string, type?: string,
       money?: number, recommend?: boolean, rate?: number,
       date?: number, lat?: number, lng?: number) {
+    this.id = id || '';
     this.type = type || 'activity';
     this.title = title || '';
     this.detail = detail || '';

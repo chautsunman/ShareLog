@@ -11,7 +11,7 @@ import {LogService} from '../log-service/log.service';
   styleUrls: ['./log-list.css']
 })
 export class LogListComponent implements OnInit {
-  logs: any[] = [];
+  logs: Log[] = [];
 
   constructor(
     private router: Router,
@@ -34,7 +34,9 @@ export class LogListComponent implements OnInit {
             this.logs = [];
 
             for (let id in logs) {
-              this.logs.push({id: id, log: logs[id]});
+              const log = logs[id];
+
+              this.logs.push(new Log(log.id, log.title, log.detail, log.type, log.money, log.recommend, log.rate, log.date, log.lat, log.lng));
             }
 
             console.log('logs', this.logs);
