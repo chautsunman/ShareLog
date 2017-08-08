@@ -1,10 +1,12 @@
-<md-toolbar color="primary">
-  <md-icon style="box-sizing: content-box; padding: 8px">menu</md-icon>
+<header class="mdc-toolbar">
+  <div class="mdc-toolbar__row">
+    <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
+      <a href="#" class="material-icons mdc-toolbar__icon--menu">menu</a>
+      <span class="mdc-toolbar__title">Share Log</span>
+    </section>
 
-  <span>Share Log</span>
-
-  <span style="flex: 1 1 auto"></span>
-
-  <a routerLink="/analytics" md-button><md-icon>bubble_chart</md-icon></a>
-  <button md-button (click)="signOut()"><md-icon>exit_to_app</md-icon></button>
-</md-toolbar>
+    <section class="mdc-toolbar__section mdc-toolbar__section--align-end">
+      <button md-button (click)="signOut()"><md-icon>exit_to_app</md-icon></button>
+    </section>
+  </div>
+</header>

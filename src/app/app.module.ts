@@ -2,6 +2,7 @@ import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {RouterModule, Routes} from '@angular/router';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MdSidenavModule} from '@angular/material';
 import 'hammerjs';
 
 import * as firebase from 'firebase';
@@ -55,6 +56,7 @@ export const firebaseConfig = {
     RouterModule.forRoot(routes),
     // AngularFireModule.initializeApp(firebaseConfig),
     BrowserAnimationsModule,
+    MdSidenavModule,
     LogsModule,
     AnalyticsModule,
     SharedModule

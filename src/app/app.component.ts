@@ -4,12 +4,16 @@ import {Router} from '@angular/router';
 
 @Component({
   selector: 'sharelog-app',
-  template: `
-    <app-bar></app-bar>
+   template: `
+    <nav-drawer></nav-drawer>
 
-    <main id="app">
-      <router-outlet></router-outlet>
-    </main>
+    <div style="flex: 1; width: 100%;">
+      <app-bar></app-bar>
+
+      <main id="app">
+        <router-outlet></router-outlet>
+      </main>
+    </div>
   `,
 })
 export class AppComponent {

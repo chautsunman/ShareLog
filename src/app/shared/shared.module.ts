@@ -5,6 +5,7 @@ import {MaterialModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {AppBar} from './app-bar/app-bar';
+import {NavDrawer} from './nav-drawer/nav-drawer';
 import {AuthComponent} from './auth/auth.component';
 
 @NgModule({
@@ -15,10 +16,12 @@ import {AuthComponent} from './auth/auth.component';
   ],
   declarations: [
     AppBar,
+    NavDrawer,
     AuthComponent
   ],
   exports: [
     AppBar,
+    NavDrawer,
     AuthComponent
   ]
 })
