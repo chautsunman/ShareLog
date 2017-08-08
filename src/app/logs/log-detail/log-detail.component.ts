@@ -20,7 +20,7 @@ declare var google: any;
 export class LogDetailComponent implements OnInit {
   logId: string = '';
   log: Log = new Log();
-  logDate: Date = new Date();
+  logDate: Date = null;
   map: any;
   mapMarker: any;
 
@@ -98,7 +98,7 @@ export class LogDetailComponent implements OnInit {
     console.log("save", f.value, f.valid);
 
     if (f.valid) {
-      this.log.date = this.logDate.getTime();
+      this.log.date = this.logDate ? this.logDate.getTime() : null;
 
       this.logService.saveLog(firebase.auth().currentUser.uid, logId, this.log)
           .then(() => {

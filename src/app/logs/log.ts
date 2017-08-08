@@ -19,7 +19,7 @@ export class Log {
     this.money = money ? money : 0;
     this.recommend = recommend || true;
     this.rate = rate || 10;
-    this.date = date || (new Date()).getTime();
+    this.date = date || null;
     this.lat = lat || 22.3964;
     this.lng = lng || 114.1095;
   }
